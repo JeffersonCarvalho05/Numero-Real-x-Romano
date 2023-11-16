@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processo seletivo 2.2</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+    <h2>Conversor de Números Romanos para Reais</h2>
+
+    <label for="numeroRomano">Número Romano:</label>
+    <input type="text" id="numeroRomano" placeholder="Digite um número romano">
+
+    <br>
+
+    <button type="button" onclick="converterNumeroReal()">Converter</button>
+    
+    <label for="numeroReal">Número Real:</label>
+    <input type="text" id="numeroReal" readonly placeholder="Número real convertido">
+
+    <script>
+        function converterNumeroReal() {
+            // Obtém o valor do input com o ID "numeroRomano" e converte para maiúsculas
+            const numeroRomano = document.getElementById("numeroRomano").value.toUpperCase();
+            // Chama a função converterParaReal, passando o número romano como argumento
+            const numeroReal = converterParaReal(numeroRomano);
+            // Define o valor do input com o ID "numeroReal" como o resultado da conversão ou uma mensagem de erro se for inválido
+            document.getElementById("numeroReal").value = numeroReal !== null ? numeroReal : "Número romano inválido";
+        }
+
+        function converterParaReal(numeroRomano) {
+             // Objeto que mapeia os valores correspondentes aos algarismos romanos
+            const valores = {
+                'I': 1,
+                'IV': 4,
+                'V': 5,
+                'IX': 9,
+                'X': 10,
+                'XL':40,
+                'L': 50,
+                'XC': 90,
+                'C': 100,
+                'CD': 400,
+                'D': 500,
+                'CM': 900,
+                'M': 1000
+            };
+            // Variável para armazenar o resultado da conversão para número real
+            let resultado = 0;
+            // Loop que percorre o número romano
+            for (let i = 0; i < numeroRomano.length; i++) {
+            // Obtém o valor do algarismo romano atual e do próximo
+                const atual = valores[numeroRomano[i]];
+                const proximo = valores[numeroRomano[i + 1]];
+            // Verifica se o próximo valor é maior que o atual
+                if (proximo > atual) {
+            // Se sim, subtrai o valor atual do próximo e adiciona ao resultado
+                    resultado += proximo - atual;
+            // Avança para o próximo algarismo romano
+                    i++; 
+                } else {
+             // Se não, apenas adiciona o valor atual ao resultado
+                    resultado += atual;
+                }
+            }
+
+            return resultado;
+        }
+    </script>
+
+<footer class="fixarRodape">
+    <img src="img/Logo Retta branco.webp" alt="logo.footer">
+</footer>
+</body>
+</html>

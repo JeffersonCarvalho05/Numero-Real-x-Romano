@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processo Seletivo 2.1</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <body>
+        <h2>Conversor de Números Real para Romanos</h2>
+
+        <label for="numeroReal">Número Real:</label>
+        <input type="number" id="numeroReal" name="numeroReal" step="any" placeholder="Digite um número real">
+    
+        <br><button type="button" onclick="converterNumeroRomano()">Converter</button>
+    
+        <label for="numeroRomano">Número Romano:</label>
+        <input type="text" id="numeroRomano" name="numeroRomano" readonly placeholder="Número romano convertido">
+    
+        <br>
+        <script>
+            function converterNumeroRomano() {
+                //Obtém o valor do input com o ID "numeroReal" e converte para um número de ponto flutuante
+                const numeroReal = parseFloat(document.getElementById("numeroReal").value);
+
+                // Verifica se o número não é um número ou está fora do intervalo permitido
+                if (isNaN(numeroReal) || numeroReal <= 0 || numeroReal >= 4000) {
+                    alert("Por favor, insira um número real maior que 0 ou menor que 4000.");
+                    return;
+                }
+                // Chama a função converterParaRomano, passando o número real como argumento
+                const numeroRomano = converterParaRomano(numeroReal);
+                // Define o valor do input com o ID "numeroRomano" como o resultado da conversão
+                document.getElementById("numeroRomano").value = numeroRomano;
+            }
+    
+            function converterParaRomano(numeroReal) {
+                // Arrays que mapeiam os valores e os símbolos correspondentes aos algarismos romanos
+                const valores = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1];
+                const simbolos = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"];
+
+                // Variável para armazenar o resultado da conversão para algarismos romanos
+                let resultado = "";
+    
+                // Loop que percorre os valores e símbolos
+                for (let i = 0; i < valores.length; i++) {
+                    // Enquanto o número real for maior ou igual ao valor atual no array
+                    while (numeroReal >= valores[i]) {
+                    // Adiciona o símbolo correspondente ao resultado
+                        resultado += simbolos[i];
+                    // Subtrai o valor atual do número real
+                        numeroReal -= valores[i];
+                    }
+                }
+                // Retorna o resultado da conversão para algarismos romanos
+                return resultado;
+            }
+        </script>
+    
+<footer class="fixarRodape">
+    <img src="img/Logo Retta branco.webp" alt="logo.footer">
+</footer>
+
+
+</body>
+</html>
